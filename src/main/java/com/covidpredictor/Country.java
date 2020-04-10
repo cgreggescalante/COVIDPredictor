@@ -21,14 +21,6 @@ public class Country extends Region {
         int cases = (int) Float.parseFloat(entry[4]);
         int fatalities = (int) Float.parseFloat(entry[5]);
 
-        if (getCumulativeCases().containsKey(localDate)) {
-            cases += getCumulativeCases().get(localDate);
-            fatalities += getCumulativeFatalities().get(localDate);
-        }
-
-        getCumulativeCases().put(localDate, cases);
-        getCumulativeFatalities().put(localDate, fatalities);
-
         if (regions.containsKey(entry[1])) {
             regions.get(entry[1]).addDay(localDate, cases, fatalities);
         } else {
@@ -40,5 +32,15 @@ public class Country extends Region {
                     }}
             );
         }
+
+        if (getCumulativeCases().containsKey(localDate)) {
+            cases += getCumulativeCases().get(localDate);
+            fatalities += getCumulativeFatalities().get(localDate);
+        }
+
+        getCumulativeCases().put(localDate, cases);
+        getCumulativeFatalities().put(localDate, fatalities);
+
+
     }
 }

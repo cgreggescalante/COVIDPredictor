@@ -6,12 +6,11 @@ import java.time.LocalDate;
 import java.util.Map;
 import java.util.TreeMap;
 
+@Getter
 public class Region {
     private String name;
 
-    @Getter
     private Map<LocalDate, Integer> cumulativeCases;
-    @Getter
     private Map<LocalDate, Integer> cumulativeFatalities;
 
     private Map<LocalDate, Integer> dailyCases;
@@ -34,6 +33,9 @@ public class Region {
         LocalDate previousDate = localDate.minusDays(1);
 
         if (cumulativeCases.containsKey(previousDate)) {
+            if (name.equals("New York")) {
+                System.out.println(cases + " " + cumulativeCases.get(previousDate));
+            }
             dailyCases.put(localDate, cases - cumulativeCases.get(previousDate));
             dailyFatalities.put(localDate, fatalities - cumulativeFatalities.get(previousDate));
         } else {
